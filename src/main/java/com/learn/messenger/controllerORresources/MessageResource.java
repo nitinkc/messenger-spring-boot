@@ -36,16 +36,6 @@ public class MessageResource {
 	public Message retrieveUserById(@PathVariable("id") @NotBlank Long id) {
 		return messageRepository.findById(id)
 				.orElseThrow(() -> new MessageNotFoundException("id:" + id));
-
-		/*
-			Optional<Student> optional = studentRepository.findById(id);
-			if (!optional.isPresent()){
-				throw new StudentNotFoundException("id:" + id);
-			}
-
-			Student foundStudent = optional.get();
-			return foundStudent;
-		*/
 	}
 
 	// Retrieve all messages for a specific user
