@@ -24,6 +24,6 @@ docker exec -it mysql_learning mysql -uroot -p
 GET : http://localhost:8080/messenger/10001/messages
 GET : http://localhost:8080/messenger/all
 
-[Help mySql][https://walkingtechie.blogspot.com/2018/12/execute-schema-and-data-sql-on-startup-spring-boot.html]
-[schema][https://github.com/nitinkc/messenger-spring-boot/blob/master/src/main/resources/schema.sql]
-[data.sql][https://github.com/nitinkc/messenger-spring-boot/blob/master/src/main/resources/data.sql]
+[Help mySql](https://walkingtechie.blogspot.com/2018/12/execute-schema-and-data-sql-on-startup-spring-boot.html)
+[schema](https://github.com/nitinkc/messenger-spring-boot/blob/master/src/main/resources/schema.sql)
+[data.sql](https://github.com/nitinkc/messenger-spring-boot/blob/master/src/main/resources/data.sql)
