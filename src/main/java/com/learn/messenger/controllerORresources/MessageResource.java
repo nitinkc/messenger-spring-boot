@@ -3,6 +3,7 @@ package com.learn.messenger.controllerORresources;
 import com.learn.messenger.exceptions.MessageNotFoundException;
 import com.learn.messenger.model.Message;
 import com.learn.messenger.repositoryORservice.MessageRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -46,6 +47,15 @@ public class MessageResource {
 			return foundStudent;
 		*/
 	}
+
+	// Retrieve all messages for a specific user
+	/*@GetMapping(path = "/{author}/messages")
+	public Message findAuthorMessages(@PathVariable("author") @NotBlank String author){
+		System.err.println("###################################### Retrieving All messages of a user ######################################");
+		return messageRepository.retrieveMessagesByAuthor(author)
+				.orElseThrow(() -> new MessageNotFoundException(author));
+	}*/
+
 
 	@DeleteMapping("/message/{id}")
 	public Message deleteStudent(@PathVariable Long id) {

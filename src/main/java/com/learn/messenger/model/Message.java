@@ -2,11 +2,15 @@ package com.learn.messenger.model;
 
 import lombok.*;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
