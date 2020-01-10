@@ -18,11 +18,14 @@ import java.util.Date;
 public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
 	@Size(min=2,message = "message should be atleast 5 characters long")
+	@Column(name = "message")
 	private String message;
 	@Past(message = "Message Cannot be in the Future/Past")
 	@Column(name = "create_dt")
 	private Date created;
+	@Column(name = "author")
 	private String author;
 }
