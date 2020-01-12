@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/messenger")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 public class MessageResource {
 
 	//Constructor Injection, NO NEED of @AUTOWIRED Annotation

@@ -1,4 +1,10 @@
-# Database
+## Multiple Profiles
+
+Dev profile has H2 in memory DB for quick testing.
+
+Remove `spring.profiles.active=dev` from application.properties
+
+## Database
 
 #### Mac Brew Mysql
 ```shell script
