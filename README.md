@@ -29,6 +29,7 @@ docker exec -it mysql_learning mysql -uroot -p
 ### Localhost
 
 GET : http://localhost:8080/messenger/10001/messages
+
 GET : http://localhost:8080/messenger/all
 
 [schema](https://github.com/nitinkc/messenger-spring-boot/blob/master/src/main/resources/schema.sql)
