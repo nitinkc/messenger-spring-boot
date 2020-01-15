@@ -58,3 +58,17 @@ http://messengerapp-env.us56ewjdta.us-east-1.elasticbeanstalk.com/messenger/1000
 
 
 ## Dockerization
+
+[Dockerfile](https://github.com/nitinkc/messenger-spring-boot/blob/master/Dockerfile)
+
+Spotify, the docker maven plugin to facilitate the dockerization
+
+Run the docker container from local machine
+
+`docker run --publish 8080:5000 -t nitinkc/messenger:0.0.1-SNAPSHOT`
+
+Spring boot on Docker container running on port 5000, mapped with port 8080 of the local machine.
+
+```shell script
+
+```
