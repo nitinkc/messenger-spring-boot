@@ -13,6 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends JpaRepository<Message,Long> {
 
-    /*@Query("SELECT m FROM messages m WHERE LOWER(m.author) = LOWER(:author)")
-    public Optional<Message> retrieveMessagesByAuthor(@PathVariable("author") @NotBlank String author);*/
+    @Query("SELECT m FROM messages m WHERE LOWER(m.author) = LOWER(:author)")
+    public Optional<List<Message>> retrieveMessagesByAuthor(@PathVariable("author") @NotBlank String author);
 }

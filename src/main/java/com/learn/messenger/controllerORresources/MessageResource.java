@@ -39,13 +39,13 @@ public class MessageResource {
 				.orElseThrow(() -> new MessageNotFoundException("id:" + id));
 	}
 
-	// Retrieve all messages for a specific user
-	/*@GetMapping(path = "/{author}/messages")
-	public Message findAuthorMessages(@PathVariable("author") @NotBlank String author){
+	//Retrieve all messages for a specific user
+	@GetMapping(path = "/{author}/messages")
+	public List<Message> findAuthorMessages(@PathVariable("author") @NotBlank String author){
 		System.err.println("###################################### Retrieving All messages of a user ######################################");
 		return messageRepository.retrieveMessagesByAuthor(author)
 				.orElseThrow(() -> new MessageNotFoundException(author));
-	}*/
+	}
 
 
 	@DeleteMapping("/message/{id}")
