@@ -12,7 +12,8 @@ public class HelloWorldController {
     @GetMapping("/")
     public String HelloWorldTesting(){
         String msg = "Messenger Service is Up and Running...";
-        String link = "<a>https://github.com/nitinkc/DockerConcepts/blob/master/README.md</a>";
-        return msg+link;
+        String link= "<a href=\"https://github.com/nitinkc/DockerConcepts/blob/master/README.md\">Visit for Exposed URI's !</a>";
+
+        return msg+"\n"+link;
     }
 }
