@@ -19,12 +19,12 @@ jobs:
       # git pull the latest commit
       - checkout
 
-        # setup testing env
-        - setup_remote_docker:
-            docker_layer_caching: true
-        - run:
-            name: Login to DockerHub
-            command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      # setup testing env
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
       - restore_cache:
