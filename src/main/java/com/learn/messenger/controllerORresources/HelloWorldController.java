@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @GetMapping("/")
     public String HelloWorldTesting(){
-        return "Messenger Service is Up and Running...";
+        String msg = "Messenger Service is Up and Running...";
+        String link = "<a>https://github.com/nitinkc/DockerConcepts/blob/master/README.md</a>";
+        return msg+link;
     }
 }
