@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11.0.1-jdk
 
     working_directory: ~/repo
 
@@ -16,7 +16,15 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
+      # git pull the latest commit
       - checkout
+
+        # setup testing env
+        - setup_remote_docker:
+            docker_layer_caching: true
+        - run:
+            name: Login to DockerHub
+            command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
       - restore_cache:
@@ -32,5 +40,13 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # run tests!
-      # run: mvn integration-test
+      # package into a jar
+      - run: mvn clean package
+
+      # build and push docker image to docker hub
+      - run: mvn clean compile jib:build -Dimage=nitinkc/messenger-app:$CIRCLE_BUILD_NUM
+
+      # store raw contents of src code
+      - store_artifacts:
+          path: target/classes
+          destination: repo
