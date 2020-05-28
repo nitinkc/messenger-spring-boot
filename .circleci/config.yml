@@ -14,6 +14,7 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
+      IMAGE_NAME: nitinkc/todo-app
 
     steps:
       # git pull the latest commit
@@ -44,7 +45,7 @@ jobs:
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=nitinkc/todo-app:todo-backend-$CIRCLE_BUILD_NUM nitinkc/todo-app:todo-backend-latest
+      - run: mvn clean compile jib:build -Dimage=$IMAGE_NAME:todo-backend-$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
