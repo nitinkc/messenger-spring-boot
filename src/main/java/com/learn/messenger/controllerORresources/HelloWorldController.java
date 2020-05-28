@@ -20,7 +20,7 @@ public class HelloWorldController {
         String link= "<a href=\"https://github.com/nitinkc/messenger-spring-boot/blob/master/README.md\">Visit for Exposed URI's !</a>";
         String swaggerLink = "http://localhost:"+ env.getProperty("server.port")+"/swagger-ui.html";
 
-        String swaglink= "<p><a href="+swaggerLink+">Visit Swagger Documentation !</a></p>";
+        String swaglink= "<p><a href="+swaggerLink+">Visit Swagger Documentation SWAGGER !</a></p>";
 
         return msg+link + swaglink;
     }
