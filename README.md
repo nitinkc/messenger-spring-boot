@@ -1,8 +1,14 @@
-## Multiple Profiles
+# Backend for ToDo App
 
+## Multiple Profiles
 Dev profile has H2 in memory DB for quick testing.
 
 Remove `spring.profiles.active=dev` from application.properties
+
+
+## Circle CI Integration and automatic DockerHub image push via circleCi Builds
+Just commit the changes into master branch, and CircleCI will begin the build, and after the build is successful, 
+the image is updated on the dockerhub repository. .circleci folder has the config.yml file for the circleci integration.
 
 ## Database
 
