@@ -1,9 +1,9 @@
-package com.learn.messenger.controllerORresources;
+package com.learn.messenger.controller;
 
 import com.learn.messenger.exceptions.MessageNotFoundException;
 import com.learn.messenger.model.Message;
-import com.learn.messenger.repositoryORservice.MessageRepository;
-import org.springframework.data.jpa.repository.Query;
+import com.learn.messenger.repository.MessageRepository;
+import com.learn.messenger.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -20,22 +20,24 @@ import java.util.Optional;
 public class MessageResource {
 
 	//Constructor Injection, NO NEED of @AUTOWIRED Annotation
-	private MessageRepository messageRepository;
-	public MessageResource(MessageRepository messageRepository){
-		this.messageRepository = messageRepository;
+	private MessageService messageService;
+
+	public MessageResource(MessageService messageService){
+		this.messageService = messageService;
 	}
 
 	// Retrieve all users
 	@GetMapping(path = "/all")
 	public List<Message> retrieveAllUsers() {
 		System.err.println("###################################### Retrieving All messages ######################################");
-		return messageRepository.findAll();
+		return messageService.findAll();
 	}
 
 	// Retrieve all messages for a specific user
 	@GetMapping(path = "/{id}/messages")
 	public Message retrieveUserById(@PathVariable("id") @NotBlank Long id) {
-		return messageRepository.findById(id)
+		return messageService
+				.findById(id)
 				.orElseThrow(() -> new MessageNotFoundException("id:" + id));
 	}
 
@@ -43,26 +45,19 @@ public class MessageResource {
 	@GetMapping(path = "/{author}/messages")
 	public List<Message> findAuthorMessages(@PathVariable("author") @NotBlank String author){
 		System.err.println("###################################### Retrieving All messages of a user ######################################");
-		return messageRepository.retrieveMessagesByAuthor(author)
-				.orElseThrow(() -> new MessageNotFoundException(author));
+		return messageService.retrieveMessagesByAuthor(author);
 	}
 
 
 	@DeleteMapping("/message/{id}")
 	public Message deleteStudent(@PathVariable Long id) {
-		Optional<Message> optional = messageRepository.findById(id);
-
-		if(optional.isPresent()){
-			messageRepository.deleteById(id);
-		}
-
-		return optional.get();
+		return messageService.deleteById(id);
 	}
 
 	@PostMapping("/message")
 	public ResponseEntity<Object> createStudent(@Valid @RequestBody Message message){
 		System.err.println("###################################### POST Begins ######################################");
-		Message savedStud = messageRepository.save(message);
+		Message savedStud = messageService.save(message);
 		System.err.println("###################################### POST Ends ######################################");
 		URI location = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -75,16 +70,16 @@ public class MessageResource {
 
 	@PutMapping("/message/{id}")
 	public Message modifyValue(@RequestBody Message newMessage, @PathVariable Long id){
-		return messageRepository.findById(id)
+		return messageService.findById(id)
 				.map(message -> {
 					message.setAuthor(newMessage.getAuthor());
 					message.setCreated(newMessage.getCreated());
 					message.setMessage(newMessage.getMessage());
-					return messageRepository.save(message);
+					return messageService.save(message);
 				})
 				.orElseGet(() -> {
 					newMessage.setId(id);
-					return messageRepository.save(newMessage);
+					return messageService.save(newMessage);
 				});
 	}
 }
