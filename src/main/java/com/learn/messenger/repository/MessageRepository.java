@@ -1,4 +1,4 @@
-package com.learn.messenger.repositoryORservice;
+package com.learn.messenger.repository;
 
 import com.learn.messenger.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;

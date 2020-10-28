@@ -1,4 +1,4 @@
-package com.learn.messenger.controllerORresources;
+package com.learn.messenger.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
