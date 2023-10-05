@@ -10,6 +10,17 @@ Remove `spring.profiles.active=dev` from application.properties
 Just commit the changes into master branch, and CircleCI will begin the build, and after the build is successful, 
 the image is updated on the dockerhub repository. .circleci folder has the config.yml file for the circleci integration.
 
+The $DOCKER_USER and $DOCKER_PASS in your CircleCI configuration are typically environment variables that you should define in your CircleCI project settings or as project-level environment variables.
+
+Here's how you can set them in your CircleCI project settings:
+
+Go to your project's settings on the CircleCI website.
+Select "Environment Variables" from the left sidebar.
+Click the "Add Environment Variable" button.
+Set the name as DOCKER_USER and the value as your Docker Hub username.
+Add another environment variable with the name DOCKER_PASS and the value as your Docker Hub password (or an access token if you prefer).
+
+
 ## Database
 
 #### Mac Brew Mysql
