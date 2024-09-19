@@ -6,13 +6,48 @@ on:
   pull_request:
     branches: [ "master" ]
 
+# Define a job to be invoked later in a workflow.
+
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
+      # specify the version you desire here
+      #- image: circleci/openjdk:11.0.1-jdk
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      # git pull the latest commit
+      - checkout
+
+      # setup testing env
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # package into a jar
+      - run: mvn clean package
+
+      # build and push docker image to docker hub
+      # - run: mvn clean compile jib:build -Dimage=$IMAGE_NAME:latest
+      - run: mvn clean compile jib:build -Dimage=$IMAGE_NAME:todo-backend-$CIRCLE_BUILD_NUM
+
+      # store raw contents of src code
+      - store_artifacts:
+          path: target/classes
+          destination: repo
+
